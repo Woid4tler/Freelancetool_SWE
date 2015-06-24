@@ -1,0 +1,5 @@
+C:\Users\Assistent\Desktop\FreelanceTool\BO_FreelanceTool\obj\Debug\BO_FreelanceTool.csprojResolveAssemblyReference.cache
+C:\Users\Assistent\Desktop\FreelanceTool\BO_FreelanceTool\bin\Debug\BO_FreelanceTool.dll
+C:\Users\Assistent\Desktop\FreelanceTool\BO_FreelanceTool\bin\Debug\BO_FreelanceTool.pdb
+C:\Users\Assistent\Desktop\FreelanceTool\BO_FreelanceTool\obj\Debug\BO_FreelanceTool.dll
+C:\Users\Assistent\Desktop\FreelanceTool\BO_FreelanceTool\obj\Debug\BO_FreelanceTool.pdb
