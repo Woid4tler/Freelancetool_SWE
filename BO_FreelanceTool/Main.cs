@@ -47,12 +47,15 @@ namespace BO_FreelanceTool
 
             return allProjects;
         }
-        /*
+
+
+        //Methode ladet einen Projectrecord direkt aus der DB, speichert Werte in
+        //BO_FreelanceTool-Objekt und gibt initialisiertes Objekt zurück.
         public static Projects getProjectByID(int ID)
         {
-
+            return Projects.Load(ID);
         }
-
+        /*
         public static Customers getCustomers()
         {
 
@@ -63,5 +66,12 @@ namespace BO_FreelanceTool
 
         }
         */
+
+        //gibt ein neues leeres Projektobjekt zum Speichern neuer Projekte zurück
+        public static Projects newProject()
+        {
+            // falls man gleich etwas vorinitialisieren will, muss man später im PL nichts ändern
+            return new Projects();
+        }
     }
 }

@@ -6,12 +6,13 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
     <h1>Freelancetool - Projektdetails</h1>
-            <asp:Button ID="btnToCustomer" runat="server" Text="Kundenverwaltung"/><br /><br />
+            <asp:Button ID="btnToCustomer" runat="server" Text="Kundenverwaltung" OnClick="btnToCustomer_Click"/><br /><br />
             <h2>Kunde:</h2>
             <asp:Label runat="server" Text="Name:"></asp:Label> <asp:TextBox ID="txtNameCustomer" runat="server"></asp:TextBox><br />
             <asp:Label runat="server" Text="Tel:"></asp:Label> <asp:TextBox ID="txtTelCustomer" runat="server"></asp:TextBox><br />

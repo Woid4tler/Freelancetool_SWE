@@ -13,5 +13,11 @@ namespace FreelanceTool
         {
 
         }
+
+        //Button zur Kundenverwaltung
+        protected void btnToCustomer_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Customers.aspx"); //Redirect zur Kundenverwaltungseite
+        }
     }
 }

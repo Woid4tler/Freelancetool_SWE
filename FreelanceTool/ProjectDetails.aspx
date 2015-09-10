@@ -6,12 +6,13 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Freelancetool</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
         <h1>Freelancetool - Projektdetails</h1>
-            <asp:Button ID="btnToDefault" runat="server" Text="Projekteverwaltung"/><br /><br />
+            <asp:Button ID="btnToDefault" runat="server" Text="Projekteverwaltung" OnClick="btnToDefault_Click"/><br /><br />
             <h2>Projekt:</h2>
             <asp:Label runat="server" Text="Name:"></asp:Label> <asp:TextBox ID="txtNameProject" runat="server"></asp:TextBox><br />
             <asp:Label runat="server" Text="Kunde:"></asp:Label> <asp:DropDownList ID="drdCustomer" runat="server"></asp:DropDownList><br />

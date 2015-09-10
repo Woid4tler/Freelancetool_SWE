@@ -13,5 +13,17 @@ namespace FreelanceTool
         {
 
         }
+
+        //Button zur Projektübersicht
+        protected void btnToDefault_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx"); //Redirect zur Projektübersicht
+        }
+
+        //Button neuen Kunden anlegen
+        protected void btnNewCustomer_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CustomerDetails.aspx"); //Redirect zur Kundendetailseite
+        }
     }
 }

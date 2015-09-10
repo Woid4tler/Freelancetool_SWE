@@ -6,16 +6,16 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Kundenübersicht - Freelancetool</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
             <h1>Freelancetool - Kundenübersicht</h1>
-            <asp:Button ID="btnToDefault" runat="server" Text="Projekteverwaltung"/><br /><br />
+            <asp:Button ID="btnToDefault" runat="server" Text="Projekteverwaltung" OnClick="btnToDefault_Click"/><br /><br />
             <asp:GridView ID="GVCustomers" runat="server"
                 AutoGenerateColumns="False"
                 AutoGenerateSelectButton="True" 
-                OnSelectedIndexChanged="GVCustomers_SelectedIndexChanged" 
                 BorderColor="#3366CC" BorderStyle="Solid" BorderWidth="1px" CellPadding="4" 
                 EmptyDataText="Keine Kunden in der Datenbank">
                 <Columns>
@@ -25,7 +25,7 @@
                 </Columns>
             </asp:GridView>
             <br />
-            <asp:Button ID="btnNewCustomer" runat="server" Text="Neuen Kunden anlegen"/><br />
+            <asp:Button ID="btnNewCustomer" runat="server" Text="Neuen Kunden anlegen" OnClick="btnNewCustomer_Click"/><br />
         </div>
     </form>
 </body>
