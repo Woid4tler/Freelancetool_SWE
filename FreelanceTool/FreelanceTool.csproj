@@ -78,8 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CustomerDetails.aspx" />
-    <Content Include="Customers.aspx" />
-    <Content Include="Default.aspx" />
+    <Content Include="CustomersOverview.aspx" />
+    <Content Include="INDEX.html" />
+    <Content Include="ProjectsOverview.aspx" />
     <Content Include="Global.asax" />
     <Content Include="ProjectDetails.aspx" />
     <Content Include="styles.css" />
@@ -94,19 +95,19 @@
     <Compile Include="CustomerDetails.aspx.designer.cs">
       <DependentUpon>CustomerDetails.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Customers.aspx.cs">
-      <DependentUpon>Customers.aspx</DependentUpon>
+    <Compile Include="CustomersOverview.aspx.cs">
+      <DependentUpon>CustomersOverview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Customers.aspx.designer.cs">
-      <DependentUpon>Customers.aspx</DependentUpon>
+    <Compile Include="CustomersOverview.aspx.designer.cs">
+      <DependentUpon>CustomersOverview.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="ProjectsOverview.aspx.cs">
+      <DependentUpon>ProjectsOverview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="ProjectsOverview.aspx.designer.cs">
+      <DependentUpon>ProjectsOverview.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

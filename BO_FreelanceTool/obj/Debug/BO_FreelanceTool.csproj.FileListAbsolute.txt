@@ -8,3 +8,8 @@ C:\Users\wg\Downloads\Freelancetool_SWE-master\BO_FreelanceTool\bin\Debug\BO_Fre
 C:\Users\wg\Downloads\Freelancetool_SWE-master\BO_FreelanceTool\obj\Debug\BO_FreelanceTool.csprojResolveAssemblyReference.cache
 C:\Users\wg\Downloads\Freelancetool_SWE-master\BO_FreelanceTool\obj\Debug\BO_FreelanceTool.dll
 C:\Users\wg\Downloads\Freelancetool_SWE-master\BO_FreelanceTool\obj\Debug\BO_FreelanceTool.pdb
+C:\Users\wg\Downloads\Freelancetool_SWE\BO_FreelanceTool\bin\Debug\BO_FreelanceTool.dll
+C:\Users\wg\Downloads\Freelancetool_SWE\BO_FreelanceTool\bin\Debug\BO_FreelanceTool.pdb
+C:\Users\wg\Downloads\Freelancetool_SWE\BO_FreelanceTool\obj\Debug\BO_FreelanceTool.csprojResolveAssemblyReference.cache
+C:\Users\wg\Downloads\Freelancetool_SWE\BO_FreelanceTool\obj\Debug\BO_FreelanceTool.dll
+C:\Users\wg\Downloads\Freelancetool_SWE\BO_FreelanceTool\obj\Debug\BO_FreelanceTool.pdb

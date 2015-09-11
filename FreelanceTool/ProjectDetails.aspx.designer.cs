@@ -22,13 +22,22 @@ namespace FreelanceTool {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// btnToDefault-Steuerelement
+        /// btnToProjectsOverview-Steuerelement
         /// </summary>
         /// <remarks>
         /// Automatisch generiertes Feld
         /// Um dies zu ändern, verschieben Sie die Felddeklaration aus der Designerdatei in eine Code-Behind-Datei.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnToDefault;
+        protected global::System.Web.UI.WebControls.Button btnToProjectsOverview;
+        
+        /// <summary>
+        /// lblProjekttitle-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Um dies zu ändern, verschieben Sie die Felddeklaration aus der Designerdatei in eine Code-Behind-Datei.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProjekttitle;
         
         /// <summary>
         /// txtNameProject-Steuerelement
@@ -40,13 +49,13 @@ namespace FreelanceTool {
         protected global::System.Web.UI.WebControls.TextBox txtNameProject;
         
         /// <summary>
-        /// drdCustomer-Steuerelement
+        /// ddlCustomer-Steuerelement
         /// </summary>
         /// <remarks>
         /// Automatisch generiertes Feld
         /// Um dies zu ändern, verschieben Sie die Felddeklaration aus der Designerdatei in eine Code-Behind-Datei.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drdCustomer;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCustomer;
         
         /// <summary>
         /// btnSaveProject-Steuerelement
@@ -76,12 +85,12 @@ namespace FreelanceTool {
         protected global::System.Web.UI.WebControls.Button btnNewTask;
         
         /// <summary>
-        /// GridViewTasks-Steuerelement
+        /// GVTasks-Steuerelement
         /// </summary>
         /// <remarks>
         /// Automatisch generiertes Feld
         /// Um dies zu ändern, verschieben Sie die Felddeklaration aus der Designerdatei in eine Code-Behind-Datei.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewTasks;
+        protected global::System.Web.UI.WebControls.GridView GVTasks;
     }
 }

@@ -1,31 +1,142 @@
 ﻿body {
-    background: #FFFFFF;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-weight: normal;
-    font-size: 80%;
-}	
-h1 { 
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: #B82619;
+  margin: 0;
+  background: #fff;
+  font-family: 'Roboto', sans-serif; 
 }
+body.backgroundimage {
+  background: url("img/working-it.jpg") no-repeat;
+  background-size: cover; 
+}
+h1 {
+  font-size: 3rem;
+  text-transform: uppercase;
+  margin-top: 0;
+  letter-spacing: .3rem; 
+}
+
 h2 {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    font-weight: bold;
-    color: #B82619;
-    background-color: #EAE2BB;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  margin-top: 0px;
+  margin-bottom: 2px;
+  letter-spacing: .1rem;
+  color: #ffffff;
+  background: rgba(0,0,0,0.6);
 }
-h3 { 
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    color: #000000;
-}        
-h4 { 
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    font-weight: bold;
-    color: #B82619; 
-} 	
+
+a {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.5);
+  padding: .5rem;
+  transition: .6s background; 
+}
+a:hover {
+  background: rgba(0, 0, 0, 0.9); 
+}
+
+input[type="submit"]{
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.5);
+  padding: .5rem;
+  transition: .6s background;
+  border: none;
+}
+input[type="submit"]:hover {
+  background: rgba(0, 0, 0, 0.9); 
+  cursor: pointer;
+}
+
+input[type="text"], select, span{
+  display: inline-block;
+  text-decoration: none;
+  padding: .5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h2 span{
+  display: inline;
+  text-decoration: none;
+  padding: 0px;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.video__text {
+  font-weight: 300;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 2rem;
+  width: 33%;
+  margin: 2rem;
+  float: right;
+  font-size: 1.2rem; 
+}
+.video__text p.button {
+  display: block;
+  width: 80%;
+  padding: .4rem;
+  border: none;
+  margin: 1rem auto;
+  font-size: 1.3rem;
+  background: rgba(255, 255, 255, 0.23);
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .3s background;
+  text-align: center;
+}
+
+.header {
+  width: 100%;
+  height: 250px;
+  background: url("img/working-it.jpg") center no-repeat;
+  background-size: cover; 
+}
+
+.header__headline {
+  padding-top: 100px;
+  text-align: center;
+  color: #fff; 
+}
+
+.content {
+    max-width: 960px;
+    margin: 0px auto;
+    padding: 25px;
+}
+table{
+   border: none;
+   width: 100%;
+}
+th {
+    background: rgba(0,0,0,0.6);
+    padding: 4px 10px;
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+td{
+    background: rgba(0,0,0,0.3);
+    padding: 10px 15px;
+    border: 1px solid #ffffff;
+}
+td:first-child{
+    width: 200px;
+}
+.buttonRow{
+    width: 90px !important;
+    text-align: center;
+}
+.street {
+    width: 200px;
+}
+.zip, .number{
+    width: 100px;
+}
+input.right {
+    float: right;
+}

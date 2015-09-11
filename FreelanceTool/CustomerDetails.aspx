@@ -10,35 +10,53 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-    <h1>Freelancetool - Projektdetails</h1>
-            <asp:Button ID="btnToCustomer" runat="server" Text="Kundenverwaltung" OnClick="btnToCustomer_Click"/><br /><br />
+        <div class="header">
+           <h1 class="header__headline">Kundendetails</h1>
+        </div>
+        <div class="content">
+            <asp:Button ID="btnToCustomer" runat="server" Text="zur Kundenübersicht" CssClass="right" OnClick="btnToCustomer_Click"/><br /><br />
             <h2>Kunde:</h2>
-            <asp:Label runat="server" Text="Name:"></asp:Label> <asp:TextBox ID="txtNameCustomer" runat="server"></asp:TextBox><br />
-            <asp:Label runat="server" Text="Tel:"></asp:Label> <asp:TextBox ID="txtTelCustomer" runat="server"></asp:TextBox><br />
-            <asp:Label runat="server" Text="E-Mail:"></asp:Label> <asp:TextBox ID="txtMailCustomer" runat="server"></asp:TextBox><br />
-            <asp:Button ID="btnSaveCustomer" runat="server" Text="Speichern" /><br /><hr />
-            <asp:GridView ID="GridViewAdresses" runat="server"
-                AutoGenerateColumns="False">
+            <asp:Table runat="server" border="1" cellspacing="0">
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Label runat="server" Text="Name:"></asp:Label><br />
+                        <asp:Label runat="server" Text="Tel:"></asp:Label><br />
+                        <asp:Label runat="server" Text="E-Mail:"></asp:Label>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:TextBox ID="txtNameCustomer" runat="server"></asp:TextBox><br />
+                         <asp:TextBox ID="txtTelCustomer" runat="server"></asp:TextBox><br />
+                         <asp:TextBox ID="txtMailCustomer" runat="server"></asp:TextBox>
+                    </asp:TableCell>
+                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnSaveCustomer" runat="server" Text="Speichern" /></asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+            <hr />
+            <asp:GridView ID="GVAdresses" runat="server"
+                AutoGenerateColumns="False"
+                EmptyDataText="Keine Adressen gespeichert">
                 <Columns>
+                    <asp:BoundField DataField="street" HeaderText="Straße" ItemStyle-CssClass="street"/>
+                    <asp:BoundField DataField="nr" HeaderText="Nummer"  ItemStyle-CssClass="number"/>
+                    <asp:BoundField DataField="zip" HeaderText="PLZ" ItemStyle-CssClass="zip" />
                     <asp:BoundField DataField="city" HeaderText="Ort" />
-                    <asp:BoundField DataField="zip" HeaderText="PLZ" />
-                    <asp:BoundField DataField="street" HeaderText="Straße" />
-                    <asp:BoundField DataField="nr" HeaderText="Nummer" />
-                    <asp:TemplateField>
+                    <asp:TemplateField ItemStyle-CssClass="buttonRow">
                         <ItemTemplate>
-                            <asp:Button ID="btnDeleteTask" runat="server" Text="X" />
+                            <asp:Button ID="btnDeleteTask" runat="server" Text="Löschen" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-            </asp:GridView><hr />
-            <h3>neue Adresse:</h3>
-            <asp:Label runat="server" Text="Ort:"></asp:Label> <asp:TextBox ID="txtCity" runat="server"></asp:TextBox><br />
-            <asp:Label runat="server" Text="PLZ:"></asp:Label> <asp:TextBox ID="txtZip" runat="server"></asp:TextBox><br />
-            <asp:Label runat="server" Text="Straße:"></asp:Label> <asp:TextBox ID="txtStreet" runat="server"></asp:TextBox><br />
-            <asp:Label runat="server" Text="Nr:"></asp:Label> <asp:TextBox ID="txtStreetnumber" runat="server"></asp:TextBox><br />
-            <asp:Button ID="btnNewAddress" runat="server" Text="Adresse speichern" />
-    </div>
+            </asp:GridView>
+            <asp:Table runat="server" border="1" cellspacing="0">
+                <asp:TableRow>
+                    <asp:TableCell CssClass="street"><asp:TextBox ID="txtCity" runat="server"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell CssClass="number"><asp:TextBox ID="txtZip" runat="server"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell CssClass="zip"><asp:TextBox ID="txtStreet" runat="server"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell><asp:TextBox ID="txtStreetnumber" runat="server"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnNewAddress" runat="server" Text="Hinzufügen" /></asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+        </div>
     </form>
 </body>
 </html>

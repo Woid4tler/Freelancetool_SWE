@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Threading.Tasks;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace BO_FreelanceTool
@@ -12,20 +11,19 @@ namespace BO_FreelanceTool
     public class Projects
     {
     // FELDER bzw. VARIABLEN *********************************************************************************************
-        private int _id;
-        private int _customerID;
+        private string _id;
+        private string _customerID;
         private string _name;
         private string _customerName;
-        private Tasks[] tasks;
 
 
     // PROPERTIES *********************************************************************************************
-        public int id
+        public string id
         {
             get { return _id; }
             internal set { _id = value; }
         }
-        public int customerID
+        public string customerID
         {
             get { return _customerID; }
             set { _customerID = value; }
@@ -41,16 +39,20 @@ namespace BO_FreelanceTool
             set { _customerName = value; }
         }
 
+        public List<Tasks> getTasks
+        {
+            get
+            {
+                return Tasks.LoadTasksForProject(this);
+            }
+
+        }
         /*
         public Customers getCustomer()
         {
 
         }
 
-        public Tasks getTasks()
-        {
-
-        }
 
         public Boolean save()
         {
@@ -77,13 +79,15 @@ namespace BO_FreelanceTool
         private static Projects fillProjectFromSQLDataReader(SqlDataReader reader)
         {
             Projects oneProject = new Projects();
-            oneProject.id = reader.GetInt32(0);
+            oneProject.id = reader.GetString(0);
             oneProject.name = reader.GetString(1);
-            oneProject.customerID = reader.GetInt32(2);
+            oneProject.customerID = reader.GetString(2);
+            Customers projectCustomer = Customers.Load(oneProject.customerID);
+            oneProject.customerName = projectCustomer.name;
             return oneProject;
         }
         // Laden eines Projectobjekts - wird von Main.getProjectByID() aufgerufen
-        internal static Projects Load(int ProjectID)
+        internal static Projects Load(string ProjectID)
         {
             string SQL = "select id, name, customerID from Projects where id = @id";
             SqlCommand cmd = new SqlCommand();
@@ -98,6 +102,19 @@ namespace BO_FreelanceTool
             }
             else
                 return null;
+        }
+        // Laden aller Projects als Liste von Objekten
+        internal static List<Projects> LoadAll()
+        {
+            SqlCommand cmd = new SqlCommand("Select id, name, customerID from Projects", Main.GetConnection());
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<Projects> allProjects = new List<Projects>();
+            while (reader.Read())
+            {
+                Projects project = fillProjectFromSQLDataReader(reader);
+                allProjects.Add(project);
+            }
+            return allProjects;
         }
     }
 }

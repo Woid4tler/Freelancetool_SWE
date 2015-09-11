@@ -10,26 +10,43 @@ namespace FreelanceTool
 {
     public partial class ProjectDetails : System.Web.UI.Page
     {
-        int currentID;
+        string currentID;
         Projects currentProject;
+        private List<Customers> allCustomers;
+        private List<Tasks> allTasks;
 
         // In der Methode wird das Business Objekt, welches in dieser Seite 
-        // visualisiert wird, geladen (wenn bestehender Kunde) oder erzeugt (neuer Kunde)
+        // visualisiert wird, geladen (wenn bestehendes Projekt) oder erzeugt (neues Projekt)
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                currentID = (int)Session["id"]; //wurde beim Aufruf übertragen
-                if (currentID != 0)
+                allCustomers = Main.getCustomers();
+                ddlCustomer.DataSource = allCustomers;
+                try
+                {
+                    ddlCustomer.DataSource = allCustomers;
+                    ddlCustomer.DataTextField = "name";
+                    ddlCustomer.DataValueField = "id";
+                    ddlCustomer.DataBind();
+                }
+                catch (Exception error)
+                {
+                    Console.Write(error.Message);
+                }
+                currentID = (string)Session["id"]; //wurde beim Aufruf übertragen
+                if (currentID != "")
                 {
                     //Objekt laden und Werte setzen
                     currentProject = Main.getProjectByID(currentID);
+
                     if (currentProject != null)
                     {
                         //kopiere die Properties des Objekts in die Felder der Maske
                         //lblID.Text = currentProject.id;
                         txtNameProject.Text = currentProject.name;
-                        //drdCustomer.Text = currentProject.customerID;
+                        lblProjekttitle.Text = " - " + currentProject.name + " / " + currentProject.customerName;
+                        ddlCustomer.SelectedValue = currentProject.customerID;
                         Session["Project"] = currentProject; //Projektobjekt in Session speichern
                         //btnDelete.Visible = true;
                     }
@@ -53,22 +70,28 @@ namespace FreelanceTool
             else
                 currentProject = (Projects)Session["Project"];
 
-            /*if (currentProject != null)
+            if (currentProject != null)
             {
-                GridViewKommentare.DataSource = currentProject.Kommentare;
-                GridViewKommentare.DataBind();
-            }*/
+                allTasks = currentProject.getTasks;
+                GVTasks.DataSource = allTasks;
+                GVTasks.DataBind();
+            }
         }
 
-        protected void GVTasks_SelectedIndexChanged(object sender, EventArgs e)
+        protected void GVTasks_BoundComments(object sender, GridViewRowEventArgs e)
         {
-
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                GridView gv = (GridView)e.Row.FindControl("GVComments");
+                gv.DataSource = allTasks[e.Row.RowIndex].getComments;
+                gv.DataBind();
+            }
         }
 
         //Button zur Projektübersicht
-        protected void btnToDefault_Click(object sender, EventArgs e)
+        protected void btnToProjectsOverview_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ProjectDetails.aspx"); //Redirect zur Projektdetailseite
+            Response.Redirect("ProjectsOverview.aspx"); //Redirect zur Projektübersichtsseite
         }
     }
 }

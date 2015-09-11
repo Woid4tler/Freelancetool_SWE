@@ -25,53 +25,42 @@ namespace BO_FreelanceTool
 
         public static List<Projects> getProjects()
         {
-            // Schnellvariante, wie oben aber alles in einer Zeile....
-            SqlCommand cmd = new SqlCommand("Select * from Projects", Main.GetConnection());
-            SqlDataReader reader = cmd.ExecuteReader();
-            List<Projects> allProjects = new List<Projects>();
-            while (reader.Read())
-            {
-                Projects project = new Projects();
-                project.id = reader.GetInt32(0);
-                project.name = reader.GetString(1);
-                project.customerID = reader.GetInt32(2);
-                SqlCommand cmdCustomer = new SqlCommand("Select * from Customers WHERE id = " + project.customerID, Main.GetConnection());
-                SqlDataReader readerCustomer = cmdCustomer.ExecuteReader();
-                while (readerCustomer.Read())
-                {
-                    project.customerName = readerCustomer.GetString(1);
-                }
-                allProjects.Add(project);
-            }
-            Console.Write(allProjects);
-
-            return allProjects;
+            return Projects.LoadAll();
         }
 
 
         //Methode ladet einen Projectrecord direkt aus der DB, speichert Werte in
         //BO_FreelanceTool-Objekt und gibt initialisiertes Objekt zurück.
-        public static Projects getProjectByID(int ID)
+        public static Projects getProjectByID(string ID)
         {
             return Projects.Load(ID);
         }
-        /*
-        public static Customers getCustomers()
+        
+        public static List<Customers> getCustomers()
         {
-
+            return Customers.LoadAll(); ;
         }
 
-        public static Customers getCustomerByID(int ID)
+        //Methode ladet einen Projectrecord direkt aus der DB, speichert Werte in
+        //BO_FreelanceTool-Objekt und gibt initialisiertes Objekt zurück.
+        public static Customers getCustomerByID(string ID)
         {
-
+            return Customers.Load(ID);
         }
-        */
+        
 
         //gibt ein neues leeres Projektobjekt zum Speichern neuer Projekte zurück
         public static Projects newProject()
         {
             // falls man gleich etwas vorinitialisieren will, muss man später im PL nichts ändern
             return new Projects();
+        }
+
+        //gibt ein neues leeres Kundenobjekt zum Speichern neuer Kunden zurück
+        public static Customers newCustomer()
+        {
+            // falls man gleich etwas vorinitialisieren will, muss man später im PL nichts ändern
+            return new Customers();
         }
     }
 }
