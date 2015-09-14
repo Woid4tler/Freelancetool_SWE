@@ -64,6 +64,7 @@ namespace FreelanceTool
                     //btnDelete.Visible = false;
                     //PlaceHolderKommentare.Visible = false;
                     currentProject = Main.newProject();
+                    //System.Diagnostics.Debug.WriteLine("neues Projekt geklickt");
                     Session["Project"] = currentProject; //neues leeres Projektobjekt
                 }
             }
@@ -76,6 +77,8 @@ namespace FreelanceTool
                 GVTasks.DataSource = allTasks;
                 GVTasks.DataBind();
             }
+
+            
         }
 
         protected void GVTasks_BoundComments(object sender, GridViewRowEventArgs e)
@@ -92,6 +95,37 @@ namespace FreelanceTool
         protected void btnToProjectsOverview_Click(object sender, EventArgs e)
         {
             Response.Redirect("ProjectsOverview.aspx"); //Redirect zur Projektübersichtsseite
+        }
+
+        protected void btnSaveProject_Click(object sender, EventArgs e)
+        {
+            if (currentProject != null)
+            {
+                //Feldwerte in das Objekt laden
+                currentProject.name = txtNameProject.Text;
+                currentProject.customerID = ddlCustomer.SelectedValue;
+                if (currentProject.save()) Response.Redirect("ProjectsOverview.aspx");
+            }
+        }
+
+        protected void btnDeleteProject_Click(object sender, EventArgs e)
+        {
+                if (currentProject.delete()) Response.Redirect("ProjectsOverview.aspx");
+        }
+
+        protected void btnNewTask_Click(object sender, EventArgs e)
+        {
+            if (currentProject != null)
+            {
+                Tasks newTask = new Tasks();
+                newTask.name = txtNewTask.Text;
+                newTask.addToProject(currentProject.id);
+                newTask.save();
+                txtNewTask.Text = "";
+                //liste neu laden
+                GVTasks.DataSource = currentProject.getTasks;
+                GVTasks.DataBind();
+            }
         }
     }
 }

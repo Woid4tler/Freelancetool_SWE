@@ -48,7 +48,7 @@ namespace BO_FreelanceTool
             SqlCommand cmd = new SqlCommand("select id, text, taskID from Comments where taskID = @taskID", Main.GetConnection());
             cmd.Parameters.Add(new SqlParameter("taskID", theTask.id));
             SqlDataReader reader = cmd.ExecuteReader();
-            List<Comments> allComments = new List<Comments>(); //initialisiere lehre Liste von Tasks
+            List<Comments> allComments = new List<Comments>(); //initialisiere leere Liste von Tasks
             while (reader.Read())
             {
                 Comments oneComment = new Comments();

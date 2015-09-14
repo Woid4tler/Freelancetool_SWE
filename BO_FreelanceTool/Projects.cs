@@ -11,7 +11,7 @@ namespace BO_FreelanceTool
     public class Projects
     {
     // FELDER bzw. VARIABLEN *********************************************************************************************
-        private string _id;
+        private string _id = "";
         private string _customerID;
         private string _name;
         private string _customerName;
@@ -48,21 +48,66 @@ namespace BO_FreelanceTool
 
         }
         /*
-        public Customers getCustomer()
-        {
+         public Customers getCustomer()
+         {
 
-        }
-
+         }
+         */
 
         public Boolean save()
-        {
+         {
+            if (_id == "")
+            {
+                //neuer Record -> INSERT
+                string SQL = "insert into Projects (id, name, customerID) values (@id, @proj_name, @cust_id)";
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = SQL;
+                cmd.Connection = Main.GetConnection();
+                //GUID für ID erzeugen und als String zurückgeben (weil mID=="")!
+                _id = Guid.NewGuid().ToString();
+                //Die Parameter in SQL-String mit Werten versehen...
+                cmd.Parameters.Add(new SqlParameter("id", _id));
+                cmd.Parameters.Add(new SqlParameter("proj_name", _name));
+                cmd.Parameters.Add(new SqlParameter("cust_id", _customerID));
+                // ExecuteNonQuery() gibt die Anzahl der veränderten/angelegten Records zurück.
+                return (cmd.ExecuteNonQuery() > 0); //hat der INSERT geklappt, sollte genau ein Record verändert worden sein
+            }
+            else
+            {
+                //bestehender Record -> UPDATE
+                string SQL = "update Projects set name=@proj_name, customerID=@cust_id, where id = @id";
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = SQL;
+                cmd.Connection = Main.GetConnection();
+                cmd.Parameters.Add(new SqlParameter("id", _id));
+                cmd.Parameters.Add(new SqlParameter("proj_name", _name));
+                cmd.Parameters.Add(new SqlParameter("cust_id", _customerID));
+                return (cmd.ExecuteNonQuery() > 0);
+            }
+         }
 
-        }
-
+         
         public Boolean delete()
         {
-
-        }*/
+            if (_id != "")
+            {
+                foreach (Tasks task in getTasks) { task.delete(); } //erst alle tasks des Projekts löschen!
+                string SQL = "delete Projects where id = @id";
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = SQL;
+                cmd.Connection = Main.GetConnection();
+                cmd.Parameters.Add(new SqlParameter("id", _id));
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    _id = ""; //das Objekt existiert weiter - es verhält sich aber wieder wie ein neuer Kunde
+                    return true;
+                }
+                else return false; //Löschen aus DB klappt nicht...
+            }
+            else return true; // Kunde hat keine ID??? -> war noch gar nicht gespeichert.
+            // wenn er nicht gespeichert war, kann man ihn auch nicht löschen,
+            // aber jedenfalls ist er auch nicht in der DB, also sagen wir halt true :-)
+        }
 
         /************************************************************************************************************
         STATISCHE METHODEN

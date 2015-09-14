@@ -28,7 +28,10 @@
                          <asp:TextBox ID="txtTelCustomer" runat="server"></asp:TextBox><br />
                          <asp:TextBox ID="txtMailCustomer" runat="server"></asp:TextBox>
                     </asp:TableCell>
-                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnSaveCustomer" runat="server" Text="Speichern" /></asp:TableCell>
+                    <asp:TableCell CssClass="buttonRow">
+                        <asp:Button ID="btnSaveCustomer" runat="server" Text="Speichern" OnClick="btnSaveCustomer_Click"/>
+                        <asp:Button ID="btnDeleteCustomer" runat="server" Text="Löschen" OnClick="btnDeleteCustomer_Click"/>
+                    </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
             <hr />
@@ -42,18 +45,18 @@
                     <asp:BoundField DataField="city" HeaderText="Ort" />
                     <asp:TemplateField ItemStyle-CssClass="buttonRow">
                         <ItemTemplate>
-                            <asp:Button ID="btnDeleteTask" runat="server" Text="Löschen" />
+                            <asp:Button ID="btnDeleteAdress" runat="server" Text="Löschen" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
             <asp:Table runat="server" border="1" cellspacing="0">
                 <asp:TableRow>
-                    <asp:TableCell CssClass="street"><asp:TextBox ID="txtCity" runat="server"></asp:TextBox></asp:TableCell>
-                    <asp:TableCell CssClass="number"><asp:TextBox ID="txtZip" runat="server"></asp:TextBox></asp:TableCell>
-                    <asp:TableCell CssClass="zip"><asp:TextBox ID="txtStreet" runat="server"></asp:TextBox></asp:TableCell>
-                    <asp:TableCell><asp:TextBox ID="txtStreetnumber" runat="server"></asp:TextBox></asp:TableCell>
-                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnNewAddress" runat="server" Text="Hinzufügen" /></asp:TableCell>
+                    <asp:TableCell CssClass="street"><asp:TextBox   ID="txtStreet" runat="server"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell CssClass="number"><asp:TextBox  ID="txtStreetnumber"  runat="server"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell CssClass="zip"><asp:TextBox ID="txtZip" runat="server"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell><asp:TextBox ID="txtCity" runat="server"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnNewAddress" runat="server" Text="Hinzufügen" OnClick="btnNewAddress_Click" /></asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
         </div>

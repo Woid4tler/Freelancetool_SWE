@@ -49,17 +49,43 @@ namespace BO_FreelanceTool
             get { return _nr; }
             set { _nr = value; }
         }
-        /*
+        
         public Boolean save()
         {
-
+            string SQL = "insert into Adresses (id, city,zip, street,nr,customerID) values (@id, @city, @zip,@street,@nr,@customerID)";
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = SQL;
+            cmd.Connection = Main.GetConnection();
+            _id = Guid.NewGuid().ToString();
+            cmd.Parameters.Add(new SqlParameter("id", _id));
+            cmd.Parameters.Add(new SqlParameter("city", _city));
+            cmd.Parameters.Add(new SqlParameter("zip", _zip));
+            cmd.Parameters.Add(new SqlParameter("street", _street));
+            cmd.Parameters.Add(new SqlParameter("nr", _nr));
+            cmd.Parameters.Add(new SqlParameter("customerID", _customerID));
+            return (cmd.ExecuteNonQuery() > 0);
         }
-
+        
         public Boolean delete()
         {
+            if (_id != "")
+            {
+                SqlCommand cmd = new SqlCommand("delete Adresses where ID = @id", Main.GetConnection());
+                cmd.Parameters.Add(new SqlParameter("id", _id));
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    _id = "";
+                    return true;
+                }
+                else return false; //Löschen aus DB klappt nicht
+            }
+            else return true;
+        }
 
-        }*/
-
+        public void addToCustomer(string cust_id)
+        {
+            _customerID = cust_id;
+        }
 
         // Laden aller Adressen als Liste von Objekten für einen bestimmten Kunden - Funktion wird von Customers aufgerufen!
         internal static List<Adresses> LoadAdressesForCustomer(Customers theCustomer)

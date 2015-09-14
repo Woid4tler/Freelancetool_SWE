@@ -17,7 +17,7 @@ namespace BO_FreelanceTool
             List<string> dirs = new List<string>(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory).Split('\\'));
             dirs.RemoveAt(dirs.Count - 1); //letztes Verzeichnis entfernen
             string conString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + String.Join(@"\", dirs) + @"\FreelanceTool.mdf;Integrated Security=True;Connect Timeout=5";
-
+            // MATHIAS connection String string conString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Mathias\Documents\GitHub\Freelancetool_SWE\FreelanceTool.mdf;Integrated Security=True;Connect Timeout=30";
             SqlConnection con = new SqlConnection(conString);
             con.Open();
             return con;

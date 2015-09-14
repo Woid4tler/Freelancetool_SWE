@@ -26,7 +26,10 @@
                         <asp:TextBox ID="txtNameProject" runat="server"></asp:TextBox><br />
                         <asp:DropDownList ID="ddlCustomer" runat="server"></asp:DropDownList>
                     </asp:TableCell>
-                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnSaveProject" runat="server" Text="Speichern" /></asp:TableCell>
+                    <asp:TableCell CssClass="buttonRow">
+                        <asp:Button ID="btnSaveProject" runat="server" Text="Speichern" OnClick="btnSaveProject_Click" />
+                        <asp:Button ID="btnDeleteProject" runat="server" Text="Löschen" OnClick="btnDeleteProject_Click" />
+                    </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
             <hr />
@@ -34,7 +37,7 @@
                 <asp:TableRow>
                     <asp:TableCell><asp:Label runat="server" Text="Neuer Task:"></asp:Label></asp:TableCell>
                     <asp:TableCell><asp:TextBox ID="txtNewTask" runat="server"></asp:TextBox></asp:TableCell>
-                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnNewTask" runat="server" Text="Hinzufügen" /></asp:TableCell>
+                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnNewTask" runat="server" Text="Hinzufügen" OnClick="btnNewTask_Click" /></asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
             <hr />
