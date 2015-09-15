@@ -31,16 +31,40 @@ namespace BO_FreelanceTool
             get { return _taskID; }
             set { _taskID = value; }
         }
-        /*
-        public Boolean save()
-        {
 
+        public void addToTask(string task_id)
+        {
+            _taskID = task_id;
         }
 
-        public Boolean delete()
+        public Boolean save()
         {
+            string SQL = "insert into Comments (id, taskID, text) values (@id, @task_id, @comment)";
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = SQL;
+            cmd.Connection = Main.GetConnection();
+            _id = Guid.NewGuid().ToString();
+            cmd.Parameters.Add(new SqlParameter("id", _id));
+            cmd.Parameters.Add(new SqlParameter("task_id", _taskID));
+            cmd.Parameters.Add(new SqlParameter("comment", _text));
+            return (cmd.ExecuteNonQuery() > 0);
+        }
 
-        }*/
+       public Boolean delete()
+       {
+           if (_id != "")
+           {
+               SqlCommand cmd = new SqlCommand("delete Comments where id = @id", Main.GetConnection());
+               cmd.Parameters.Add(new SqlParameter("id", _id));
+               if (cmd.ExecuteNonQuery() > 0)
+               {
+                   _id = "";
+                   return true;
+               }
+               else return false; //Löschen aus DB klappt nicht
+           }
+           else return true;
+       }
 
         // Laden aller Comments als Liste von Objekten für einen Task - Funktion wird von Tasks aufgerufen!
         internal static List<Comments> LoadCommentsForTasks(Tasks theTask)

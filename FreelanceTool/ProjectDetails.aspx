@@ -14,9 +14,10 @@
            <h1 class="header__headline">Projektdetails</h1>
         </div>
         <div class="content">
+            <asp:Label ID="lblError" CssClass="error" runat="server" Font-Bold="True"></asp:Label>
             <asp:Button ID="btnToProjectsOverview" runat="server" CssClass="right" Text="zur Projektübersicht" OnClick="btnToProjectsOverview_Click"/><br /><br />
             <h2>PROJEKT <asp:Label runat="server" ID="lblProjekttitle"></asp:Label></h2>
-            <asp:Table runat="server" border="1" cellspacing="0">
+            <asp:Table runat="server" cellspacing="0">
                 <asp:TableRow>
                     <asp:TableCell>
                         <asp:Label runat="server" Text="Name:"></asp:Label><br />
@@ -27,13 +28,13 @@
                         <asp:DropDownList ID="ddlCustomer" runat="server"></asp:DropDownList>
                     </asp:TableCell>
                     <asp:TableCell CssClass="buttonRow">
-                        <asp:Button ID="btnSaveProject" runat="server" Text="Speichern" OnClick="btnSaveProject_Click" />
+                        <asp:Button ID="btnSaveProject" runat="server" Text="Speichern" OnClick="btnSaveProject_Click" /><br /><br />
                         <asp:Button ID="btnDeleteProject" runat="server" Text="Löschen" OnClick="btnDeleteProject_Click" />
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
             <hr />
-            <asp:Table runat="server" border="1" cellspacing="0">
+            <asp:Table runat="server" ID="tblNewTask" cellspacing="0">
                 <asp:TableRow>
                     <asp:TableCell><asp:Label runat="server" Text="Neuer Task:"></asp:Label></asp:TableCell>
                     <asp:TableCell><asp:TextBox ID="txtNewTask" runat="server"></asp:TextBox></asp:TableCell>
@@ -44,7 +45,7 @@
             <asp:GridView ID="GVTasks" runat="server"
                 AutoGenerateColumns="False"
                 EmptyDataText="Keine Tasks gespeichert" 
-                onrowdatabound="GVTasks_BoundComments">
+                onrowdatabound="GVTasks_BoundComments" OnRowDeleting="GVTasks_RowDeleting">
                 <Columns>
                     <asp:BoundField DataField="name" HeaderText="Tasks" />
                     <asp:TemplateField>
@@ -61,19 +62,15 @@
                                     </asp:TemplateField>
                                 </Columns>
                             </asp:GridView><br />
-                            <asp:Table runat="server" border="1" cellspacing="0">
+                            <asp:Table runat="server" cellspacing="0">
                                 <asp:TableRow>
                                     <asp:TableCell><asp:TextBox ID="txtNewComment" runat="server"></asp:TextBox></asp:TableCell>
-                                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnNewComment" runat="server" Text="Speichern" /></asp:TableCell>
+                                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnNewComment" runat="server" Text="Hinzufügen" OnClick="btnNewComment_Click"/></asp:TableCell>
                                 </asp:TableRow>
                             </asp:Table>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField ItemStyle-CssClass="buttonRow">
-                        <ItemTemplate>
-                            <asp:Button ID="btnDeleteTask" runat="server" Text="Löschen"/>
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                     <asp:ButtonField CommandName="Delete" text="Löschen" ItemStyle-CssClass="buttonRow"/>
                 </Columns>
             </asp:GridView>
         </div>

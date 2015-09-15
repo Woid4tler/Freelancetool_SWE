@@ -14,9 +14,10 @@
            <h1 class="header__headline">Kundendetails</h1>
         </div>
         <div class="content">
+            <asp:Label ID="lblError" CssClass="error" runat="server" Font-Bold="True"></asp:Label>
             <asp:Button ID="btnToCustomer" runat="server" Text="zur Kundenübersicht" CssClass="right" OnClick="btnToCustomer_Click"/><br /><br />
-            <h2>Kunde:</h2>
-            <asp:Table runat="server" border="1" cellspacing="0">
+            <h2>Kunde</h2>
+            <asp:Table runat="server" cellspacing="0">
                 <asp:TableRow>
                     <asp:TableCell>
                         <asp:Label runat="server" Text="Name:"></asp:Label><br />
@@ -29,7 +30,7 @@
                          <asp:TextBox ID="txtMailCustomer" runat="server"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell CssClass="buttonRow">
-                        <asp:Button ID="btnSaveCustomer" runat="server" Text="Speichern" OnClick="btnSaveCustomer_Click"/>
+                        <asp:Button ID="btnSaveCustomer" runat="server" Text="Speichern" OnClick="btnSaveCustomer_Click"/><br /><br />
                         <asp:Button ID="btnDeleteCustomer" runat="server" Text="Löschen" OnClick="btnDeleteCustomer_Click"/>
                     </asp:TableCell>
                 </asp:TableRow>
@@ -37,20 +38,23 @@
             <hr />
             <asp:GridView ID="GVAdresses" runat="server"
                 AutoGenerateColumns="False"
-                EmptyDataText="Keine Adressen gespeichert">
+                EmptyDataText="Keine Adressen gespeichert" OnRowDeleting="GVAdresses_RowDeleting">
                 <Columns>
                     <asp:BoundField DataField="street" HeaderText="Straße" ItemStyle-CssClass="street"/>
                     <asp:BoundField DataField="nr" HeaderText="Nummer"  ItemStyle-CssClass="number"/>
                     <asp:BoundField DataField="zip" HeaderText="PLZ" ItemStyle-CssClass="zip" />
                     <asp:BoundField DataField="city" HeaderText="Ort" />
-                    <asp:TemplateField ItemStyle-CssClass="buttonRow">
-                        <ItemTemplate>
-                            <asp:Button ID="btnDeleteAdress" runat="server" Text="Löschen" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                    <asp:ButtonField CommandName="Delete" text="Löschen" ItemStyle-CssClass="buttonRow"/>
                 </Columns>
-            </asp:GridView>
-            <asp:Table runat="server" border="1" cellspacing="0">
+            </asp:GridView><hr /><br />
+            <asp:Table runat="server" ID="tblNewAdress" cellspacing="0">
+                <asp:TableRow>
+                    <asp:TableHeaderCell CssClass="street">Straße</asp:TableHeaderCell>
+                    <asp:TableHeaderCell CssClass="number">Nummer</asp:TableHeaderCell>
+                    <asp:TableHeaderCell CssClass="zip">PLZ</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Ort</asp:TableHeaderCell>
+                    <asp:TableHeaderCell CssClass="buttonRow"></asp:TableHeaderCell>
+                </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell CssClass="street"><asp:TextBox   ID="txtStreet" runat="server"></asp:TextBox></asp:TableCell>
                     <asp:TableCell CssClass="number"><asp:TextBox  ID="txtStreetnumber"  runat="server"></asp:TextBox></asp:TableCell>

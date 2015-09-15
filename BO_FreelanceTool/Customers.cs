@@ -65,7 +65,7 @@ namespace BO_FreelanceTool
             else
             {
                 //bestehender Record -> UPDATE
-                string SQL = "update Customers set name=@cust_name, mail=@cust_mail, phone=@cust_phone, where id = @id";
+                string SQL = "update Customers set name=@cust_name, mail=@cust_mail, phone=@cust_phone where id = @id";
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = SQL;
                 cmd.Connection = Main.GetConnection();
@@ -80,7 +80,7 @@ namespace BO_FreelanceTool
        public Boolean delete(){
             if (_id != "")
             {
-                foreach (Adresses address in getAdresses) { address.delete(); } //erst alle tasks des Projekts löschen!
+                foreach (Adresses address in getAdresses) { address.delete(); } //erst alle Adressen des Kunden löschen!
                 string SQL = "delete Customers where id = @id";
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = SQL;

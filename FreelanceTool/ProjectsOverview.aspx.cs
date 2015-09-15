@@ -43,8 +43,6 @@ namespace FreelanceTool
         // und dann im Eigenschaftenfenster die Events auswählen (der Blitz)
         // dann Doppelklick in die Zeile SelectedIndexChanged
         // Tritt auf, wenn einer der Select-Button der GridView gedrückt wurde
-        // In den Eigenschaften des GridViews muss die Eigenschaft "AutoGenerateSelectButton"
-        // auf true stehen, damit der Select-Button zu sehen ist.
         protected void GVProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Get the currently selected row using the SelectedRow property.

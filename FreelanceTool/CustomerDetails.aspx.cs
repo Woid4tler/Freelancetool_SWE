@@ -12,6 +12,7 @@ namespace FreelanceTool
     {
         string currentID;
         Customers currentCustomer;
+        List<Adresses> allAdresses;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,21 +32,22 @@ namespace FreelanceTool
                         txtTelCustomer.Text = currentCustomer.phone;
                         txtMailCustomer.Text = currentCustomer.mail;
                         Session["Customer"] = currentCustomer; //Projektobjekt in Session speichern
-                        //btnDelete.Visible = true;
+                        btnDeleteCustomer.Visible = true;
+                        tblNewAdress.Visible = true;
                     }
                     else
                     {
-                        //lblError.Text = "Kunde nicht gefunden - Sie können einen neuen Kunden anlegen!";
-                        //btnDelete.Visible = false;
-                        //PlaceHolderKommentare.Visible = false;
+                        lblError.Text = "Kunde nicht gefunden - Sie können einen neuen Kunden anlegen!";
+                        btnDeleteCustomer.Visible = false;
+                        tblNewAdress.Visible = false;
                         Session["Customer"] = Main.newCustomer(); //neues leeres Kundenobjekt
                     }
                 }
                 else
                 {
                     //leere ID? Dann ist das ein neuer Kunde
-                    //btnDelete.Visible = false;
-                    //PlaceHolderKommentare.Visible = false;
+                    btnDeleteCustomer.Visible = false;
+                    tblNewAdress.Visible = false;
                     currentCustomer = Main.newCustomer();
                     Session["Customer"] = currentCustomer; //neues leeres Projektobjekt
                 }
@@ -55,7 +57,8 @@ namespace FreelanceTool
 
             if (currentCustomer != null)
             {
-                GVAdresses.DataSource = currentCustomer.getAdresses;
+                allAdresses = currentCustomer.getAdresses;
+                GVAdresses.DataSource = allAdresses;
                 GVAdresses.DataBind(); //dadurch wirds angezeigt
             }
         }
@@ -74,12 +77,22 @@ namespace FreelanceTool
                 currentCustomer.name = txtNameCustomer.Text;
                 currentCustomer.phone = txtTelCustomer.Text;
                 currentCustomer.mail = txtMailCustomer.Text;
-                if (currentCustomer.save()) Response.Redirect("CustomersOverview.aspx");
+                if (currentCustomer.save())
+                {
+                    lblError.Text = "Kunde wurde gespeichert!";
+                    btnDeleteCustomer.Visible = true;
+                    tblNewAdress.Visible = true;
+                }
+                else lblError.Text = "Speichern fehlgeschlagen";
             }
+            else lblError.Text = "Kunde existiert nicht mehr in der Datenbank!";
+
+
         }
         protected void btnDeleteCustomer_Click(object sender, EventArgs e)
         {
             if (currentCustomer.delete()) Response.Redirect("CustomersOverview.aspx");
+            else lblError.Text = "Löschen nicht möglich";
         }
         
 
@@ -89,7 +102,7 @@ namespace FreelanceTool
             {
                 Adresses newAdress = new Adresses();
                 newAdress.city = txtCity.Text;
-                newAdress.zip = Int32.Parse( txtZip.Text );
+                newAdress.zip = txtZip.Text;
                 newAdress.street = txtStreet.Text;
                 newAdress.nr = Int32.Parse(txtStreetnumber.Text);
                 newAdress.addToCustomer(currentCustomer.id);
@@ -103,6 +116,17 @@ namespace FreelanceTool
                 GVAdresses.DataBind();
             }
         }
+
+        protected void GVAdresses_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            Adresses adressToDelete = allAdresses[e.RowIndex];
+            if (adressToDelete.delete())
+            {
+                GVAdresses.DataSource = currentCustomer.getAdresses;
+                GVAdresses.DataBind();
+            }
+        }
+
 
 
     }

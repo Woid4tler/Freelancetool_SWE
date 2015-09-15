@@ -43,28 +43,26 @@ namespace FreelanceTool
                     if (currentProject != null)
                     {
                         //kopiere die Properties des Objekts in die Felder der Maske
-                        //lblID.Text = currentProject.id;
                         txtNameProject.Text = currentProject.name;
                         lblProjekttitle.Text = " - " + currentProject.name + " / " + currentProject.customerName;
                         ddlCustomer.SelectedValue = currentProject.customerID;
                         Session["Project"] = currentProject; //Projektobjekt in Session speichern
-                        //btnDelete.Visible = true;
+                        btnDeleteProject.Visible = true;
                     }
                     else
                     {
-                        //lblError.Text = "Projekt nicht gefunden - Sie können ein neues Projekt anlegen!";
-                        //btnDelete.Visible = false;
-                        //PlaceHolderKommentare.Visible = false;
+                        lblError.Text = "Projekt nicht gefunden - Sie können ein neues Projekt anlegen!";
+                        btnDeleteProject.Visible = false;
+                        tblNewTask.Visible = false;
                         Session["Project"] = Main.newProject(); //neues leeres Kundenobjekt
                     }
                 }
                 else
                 {
                     //leere ID? Dann ist das ein neues Projekt
-                    //btnDelete.Visible = false;
-                    //PlaceHolderKommentare.Visible = false;
+                    btnDeleteProject.Visible = false;
+                    tblNewTask.Visible = false;
                     currentProject = Main.newProject();
-                    //System.Diagnostics.Debug.WriteLine("neues Projekt geklickt");
                     Session["Project"] = currentProject; //neues leeres Projektobjekt
                 }
             }
@@ -86,6 +84,7 @@ namespace FreelanceTool
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 GridView gv = (GridView)e.Row.FindControl("GVComments");
+                allTasks = currentProject.getTasks;
                 gv.DataSource = allTasks[e.Row.RowIndex].getComments;
                 gv.DataBind();
             }
@@ -104,8 +103,15 @@ namespace FreelanceTool
                 //Feldwerte in das Objekt laden
                 currentProject.name = txtNameProject.Text;
                 currentProject.customerID = ddlCustomer.SelectedValue;
-                if (currentProject.save()) Response.Redirect("ProjectsOverview.aspx");
+                if (currentProject.save())
+                {
+                    lblError.Text = "Projekt wurde gespeichert!";
+                    btnDeleteProject.Visible = true;
+                    tblNewTask.Visible = true;
+                }
+                else lblError.Text = "Speichern fehlgeschlagen";
             }
+            else lblError.Text = "Projekt existiert nicht mehr in der Datenbank!";
         }
 
         protected void btnDeleteProject_Click(object sender, EventArgs e)
@@ -123,6 +129,41 @@ namespace FreelanceTool
                 newTask.save();
                 txtNewTask.Text = "";
                 //liste neu laden
+                GVTasks.DataSource = currentProject.getTasks;
+                GVTasks.DataBind();
+            }
+        }
+
+        protected void btnNewComment_Click(object sender, EventArgs e)
+        {
+            /*if (currentProject != null)
+            {
+                Comments newComment = new Comments();
+                //newComment.text = txtNewComment.Text;
+
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    GridView gv = (GridView)e.Row.FindControl("GVComments");
+                    allTasks = currentProject.getTasks;
+                    gv.DataSource = allTasks[e.Row.RowIndex].getComments;
+                    gv.DataBind();
+
+                }
+                newComment.text = "test";
+                newComment.addToTask(currentProject.id);
+                newComment.save();
+                txtNewTask.Text = "";
+                //liste neu laden
+                //GVTasks.DataSource = currentProject.getTasks;
+                //GVTasks.DataBind();
+            }*/
+        }
+        
+        protected void GVTasks_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            Tasks taskToDelete = allTasks[e.RowIndex];
+            if (taskToDelete.delete())
+            {
                 GVTasks.DataSource = currentProject.getTasks;
                 GVTasks.DataBind();
             }

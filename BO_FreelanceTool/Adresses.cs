@@ -14,7 +14,7 @@ namespace BO_FreelanceTool
         private string _id;
         private string _customerID;
         private string _city;
-        private int _zip;
+        private string _zip;
         private string _street;
         private int _nr;
 
@@ -34,7 +34,7 @@ namespace BO_FreelanceTool
             get { return _city; }
             set { _city = value; }
         }
-        public int zip
+        public string zip
         {
             get { return _zip; }
             set { _zip = value; }
@@ -52,7 +52,7 @@ namespace BO_FreelanceTool
         
         public Boolean save()
         {
-            string SQL = "insert into Adresses (id, city,zip, street,nr,customerID) values (@id, @city, @zip,@street,@nr,@customerID)";
+            string SQL = "insert into Adresses (id, city, zip, street, nr, customerID) values (@id, @city, @zip, @street, @nr, @customerID)";
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = SQL;
             cmd.Connection = Main.GetConnection();
@@ -99,7 +99,7 @@ namespace BO_FreelanceTool
                 Adresses oneAdress = new Adresses();
                 oneAdress.id = reader.GetString(0);
                 oneAdress.city = reader.GetString(1);
-                oneAdress.zip = reader.GetInt32(2);
+                oneAdress.zip = reader.GetString(2);
                 oneAdress.street = reader.GetString(3);
                 oneAdress.nr = reader.GetInt32(4);
                 oneAdress.customerID = reader.GetString(5);
