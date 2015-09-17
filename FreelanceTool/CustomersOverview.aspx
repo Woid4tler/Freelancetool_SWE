@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Kundenübersicht - Freelancetool</title>
     <link rel="stylesheet" href="styles.css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css' />
 </head>
 <body>
     <form id="form1" runat="server">

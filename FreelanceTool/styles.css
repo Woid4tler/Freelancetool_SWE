@@ -15,11 +15,19 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   padding: 5px 10px;
   margin-top: 0px;
   margin-bottom: 2px;
-  letter-spacing: .1rem;
+  color: #ffffff;
+  background: rgba(0,0,0,0.6);
+}
+
+h3 {
+  font-size: 1.2rem;
+  padding: 5px 6px;
+  margin-top: 0px;
+  margin-bottom: 2px;
   color: #ffffff;
   background: rgba(0,0,0,0.6);
 }
@@ -31,6 +39,7 @@ a {
   background: rgba(0, 0, 0, 0.5);
   padding: .5rem;
   transition: .6s background; 
+  font-size: 0.8rem;
 }
 a:hover {
   background: rgba(0, 0, 0, 0.9); 
@@ -44,17 +53,19 @@ input[type="submit"]{
   padding: .5rem;
   transition: .6s background;
   border: none;
+  font-size: 0.8rem;
 }
+
 input[type="submit"]:hover {
   background: rgba(0, 0, 0, 0.9); 
   cursor: pointer;
 }
 
-input[type="text"], select, span{
+input[type="text"], select{
   display: inline-block;
   text-decoration: none;
   padding: .5rem;
-  width: 100%;
+  width: 250px;
   box-sizing: border-box;
 }
 
@@ -65,7 +76,10 @@ h2 span{
   width: auto;
   box-sizing: border-box;
 }
-
+h2 span.dateHeading{
+    font-size: 1.0rem;
+    line-height: 1.4rem;
+}
 .video__text {
   font-weight: 300;
   background: rgba(0, 0, 0, 0.6);
@@ -124,19 +138,64 @@ td{
     padding: 10px 15px;
     border: 1px solid #ffffff;
 }
-td:first-child{
+.commentsCell td{
+    background: none;
+    padding: 2px 15px;
+    border: none;
+}
+td.commentsCell tr:last-child td{
+    border-bottom: none;
+}
+
+td.commentsCell{
+    background: rgba(0,0,0,0.2);
+    padding: 5px 0px;
+    font-size: 0.8rem;
+}
+td.projectRow{
+    width: 350px !important;
+}
+td.labelCell{
     width: 200px;
 }
-.buttonRow{
-    width: 90px !important;
+
+.labelCell span{
+  display: inline-block;
+  text-decoration: none;
+  padding: .5rem;
+  box-sizing: border-box;
+}
+.buttonRow, .buttonCell{
+    width: 80px !important;
     text-align: center;
+    padding: 5px 10px;
 }
-.street {
-    width: 200px;
+.buttonCell input[type="submit"], .buttonRow input[type="submit"]{
+    width: 80px;
 }
-.zip, .number{
-    width: 100px;
+#btnSaveProject, #btnCancel, #btnSaveCustomer{
+    margin-bottom: 5px;
 }
-input.right {
+.taskCell{
+    vertical-align: top;
+}
+.street, .street input[type="text"], .street span{
+    width: 200px !important;
+}
+.zip, .zip input[type="text"], .zip span, .number, .number input[type="text"], .number span{
+    width: 100px !important;
+}
+.right{
     float: right;
+}
+
+.errorMessages{
+    font-size: 0.7rem ;
+    color: red ;
+    padding: .4rem;
+}
+
+.date{
+    font-size: 0.7rem;
+    text-align: right;
 }

@@ -19,10 +19,10 @@ namespace FreelanceTool
         // visualisiert wird, geladen (wenn bestehendes Projekt) oder erzeugt (neues Projekt)
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblError.Text = "";
             if (!IsPostBack)
             {
                 allCustomers = Main.getCustomers();
-                ddlCustomer.DataSource = allCustomers;
                 try
                 {
                     ddlCustomer.DataSource = allCustomers;
@@ -43,41 +43,37 @@ namespace FreelanceTool
                     if (currentProject != null)
                     {
                         //kopiere die Properties des Objekts in die Felder der Maske
-                        //lblID.Text = currentProject.id;
                         txtNameProject.Text = currentProject.name;
                         lblProjekttitle.Text = " - " + currentProject.name + " / " + currentProject.customerName;
                         ddlCustomer.SelectedValue = currentProject.customerID;
+                        txtDateEnd.Text = currentProject.dateEnd;
+                        lblDateCreate.Text = currentProject.dateCreate;
                         Session["Project"] = currentProject; //Projektobjekt in Session speichern
-                        //btnDelete.Visible = true;
+                        btnDeleteProject.Visible = true;
+                        lblDateCreate.Visible = true;
+                        updateTasks();
                     }
                     else
                     {
-                        //lblError.Text = "Projekt nicht gefunden - Sie können ein neues Projekt anlegen!";
-                        //btnDelete.Visible = false;
-                        //PlaceHolderKommentare.Visible = false;
+                        lblError.Text = "Projekt nicht gefunden - Sie können ein neues Projekt anlegen!";
+                        btnDeleteProject.Visible = false;
+                        tblNewTask.Visible = false;
+                        lblDateCreate.Visible = false;
                         Session["Project"] = Main.newProject(); //neues leeres Kundenobjekt
                     }
                 }
                 else
                 {
                     //leere ID? Dann ist das ein neues Projekt
-                    //btnDelete.Visible = false;
-                    //PlaceHolderKommentare.Visible = false;
+                    btnDeleteProject.Visible = false;
+                    tblNewTask.Visible = false;
+                    lblDateCreate.Visible = false;
                     currentProject = Main.newProject();
-                    //System.Diagnostics.Debug.WriteLine("neues Projekt geklickt");
                     Session["Project"] = currentProject; //neues leeres Projektobjekt
                 }
             }
             else
                 currentProject = (Projects)Session["Project"];
-
-            if (currentProject != null)
-            {
-                allTasks = currentProject.getTasks;
-                GVTasks.DataSource = allTasks;
-                GVTasks.DataBind();
-            }
-
             
         }
 
@@ -86,6 +82,7 @@ namespace FreelanceTool
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 GridView gv = (GridView)e.Row.FindControl("GVComments");
+                allTasks = currentProject.getTasks;
                 gv.DataSource = allTasks[e.Row.RowIndex].getComments;
                 gv.DataBind();
             }
@@ -99,23 +96,40 @@ namespace FreelanceTool
 
         protected void btnSaveProject_Click(object sender, EventArgs e)
         {
-            if (currentProject != null)
+            lblError.Text = "";
+            if (currentProject != null && dateValidator(txtDateEnd.Text))
             {
                 //Feldwerte in das Objekt laden
                 currentProject.name = txtNameProject.Text;
                 currentProject.customerID = ddlCustomer.SelectedValue;
-                if (currentProject.save()) Response.Redirect("ProjectsOverview.aspx");
+                currentProject.dateEnd = txtDateEnd.Text;
+                if (currentProject.save())
+                {
+                    currentProject.setCustomer();
+                    lblError.Text = "Projekt wurde gespeichert!";
+                    btnDeleteProject.Visible = true;
+                    tblNewTask.Visible = true;
+                    lblDateCreate.Visible = true;
+                    lblDateCreate.Text = currentProject.dateCreate;
+                    lblProjekttitle.Text = " - " + currentProject.name + " / " + currentProject.customerName;
+                }
+                else lblError.Text = "Speichern fehlgeschlagen";
             }
+            else if(dateValidator(txtDateEnd.Text)) lblError.Text = "Projekt existiert nicht mehr in der Datenbank!";
+            else lblDateNotValid.Text = "kein gültiges Datum (z.B.: 11.11.2015)";
         }
 
         protected void btnDeleteProject_Click(object sender, EventArgs e)
         {
-                if (currentProject.delete()) Response.Redirect("ProjectsOverview.aspx");
+            lblError.Text = "";
+            if (currentProject.delete()) Response.Redirect("ProjectsOverview.aspx");
+            else lblError.Text = "Löschen nicht möglich!";
         }
 
         protected void btnNewTask_Click(object sender, EventArgs e)
         {
-            if (currentProject != null)
+            lblError.Text = "";
+            if (currentProject != null && txtNewTask.Text != "")
             {
                 Tasks newTask = new Tasks();
                 newTask.name = txtNewTask.Text;
@@ -123,9 +137,74 @@ namespace FreelanceTool
                 newTask.save();
                 txtNewTask.Text = "";
                 //liste neu laden
-                GVTasks.DataSource = currentProject.getTasks;
-                GVTasks.DataBind();
+                updateTasks();
             }
+            else lblError.Text = "Task kann nicht gespeichert werden!";
+        }
+
+        protected void btnNewComment_Click(object sender, EventArgs e)
+        {
+            lblError.Text = "";
+            if (currentProject != null && txtNewComment.Text != "")
+            {
+                Comments newComment = new Comments();
+                newComment.text = txtNewComment.Text;
+                newComment.addToTask(ddlTask.SelectedItem.Value);
+                newComment.save();
+                txtNewComment.Text = "";
+                //liste neu laden
+                updateTasks();
+            }
+            else lblError.Text = "Kommentar kann nicht gespeichert werden!";
+        }
+        
+        protected void GVTasks_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            lblError.Text = "";
+            allTasks = currentProject.getTasks;
+            Tasks taskToDelete = allTasks[e.RowIndex];
+            if (taskToDelete.delete())
+            {
+                updateTasks();
+            }
+            else lblError.Text = "Task kann nicht gelöscht werden!";
+        }
+
+        protected void updateTasks()
+        {
+            allTasks = currentProject.getTasks;
+            GVTasks.DataSource = allTasks;
+            GVTasks.DataBind();
+
+            try
+            {
+                ddlTask.DataSource = allTasks;
+                ddlTask.DataTextField = "name";
+                ddlTask.DataValueField = "id";
+                ddlTask.DataBind();
+            }
+            catch (Exception error)
+            {
+                Console.Write(error.Message);
+            }
+        }
+
+        protected Boolean dateValidator(String date)
+        {
+            DateTime minDate = DateTime.Parse("1000/12/28");
+            DateTime maxDate = DateTime.Parse("9999/12/28");
+            DateTime dt;
+
+            if (DateTime.TryParse(date, out dt) && dt <= maxDate && dt >= minDate)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ProjectOverview.aspx"); //ohne Speichern zur Projektübersicht
         }
     }
 }

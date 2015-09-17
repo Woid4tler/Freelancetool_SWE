@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=15.1.3.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Documents\ASP.NET AJAX Control Toolkit\Bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -102,7 +106,6 @@
     <Content Include="CustomersOverview.aspx" />
     <Content Include="INDEX.html" />
     <Content Include="ProjectsOverview.aspx" />
-    <Content Include="Global.asax" />
     <Content Include="ProjectDetails.aspx" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
@@ -130,9 +133,6 @@
     </Compile>
     <Compile Include="ProjectsOverview.aspx.designer.cs">
       <DependentUpon>ProjectsOverview.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ProjectDetails.aspx.cs">
       <DependentUpon>ProjectDetails.aspx</DependentUpon>

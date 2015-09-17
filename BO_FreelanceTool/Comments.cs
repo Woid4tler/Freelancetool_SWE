@@ -14,6 +14,7 @@ namespace BO_FreelanceTool
         private string _id;
         private string _text;
         private string _taskID;
+        private string _dateString;
 
         // PROPERTIES *********************************************************************************************
         public string id
@@ -31,21 +32,50 @@ namespace BO_FreelanceTool
             get { return _taskID; }
             set { _taskID = value; }
         }
-        /*
-        public Boolean save()
+        public string dateString
         {
-
+            get { return _dateString; }
+            set { _dateString = value; }
         }
 
-        public Boolean delete()
+        public void addToTask(string task_id)
         {
+            _taskID = task_id;
+        }
 
-        }*/
+        public Boolean save()
+        {
+            string SQL = "insert into Comments (id, taskID, text, date) values (@id, @task_id, @comment, CURRENT_TIMESTAMP)";
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = SQL;
+            cmd.Connection = Main.GetConnection();
+            _id = Guid.NewGuid().ToString();
+            cmd.Parameters.Add(new SqlParameter("id", _id));
+            cmd.Parameters.Add(new SqlParameter("task_id", _taskID));
+            cmd.Parameters.Add(new SqlParameter("comment", _text));
+            return (cmd.ExecuteNonQuery() > 0);
+        }
+
+       public Boolean delete()
+       {
+           if (_id != "")
+           {
+               SqlCommand cmd = new SqlCommand("delete Comments where id = @id", Main.GetConnection());
+               cmd.Parameters.Add(new SqlParameter("id", _id));
+               if (cmd.ExecuteNonQuery() > 0)
+               {
+                   _id = "";
+                   return true;
+               }
+               else return false; //Löschen aus DB klappt nicht
+           }
+           else return true;
+       }
 
         // Laden aller Comments als Liste von Objekten für einen Task - Funktion wird von Tasks aufgerufen!
         internal static List<Comments> LoadCommentsForTasks(Tasks theTask)
         {
-            SqlCommand cmd = new SqlCommand("select id, text, taskID from Comments where taskID = @taskID", Main.GetConnection());
+            SqlCommand cmd = new SqlCommand("select id, text, taskID, date from Comments where taskID = @taskID", Main.GetConnection());
             cmd.Parameters.Add(new SqlParameter("taskID", theTask.id));
             SqlDataReader reader = cmd.ExecuteReader();
             List<Comments> allComments = new List<Comments>(); //initialisiere leere Liste von Tasks
@@ -55,6 +85,7 @@ namespace BO_FreelanceTool
                 oneComment.id = reader.GetString(0);
                 oneComment.text = reader.GetString(1);
                 oneComment.taskID = reader.GetString(2);
+                oneComment.dateString = reader.GetDateTime(3).ToString("dd.MM.yyyy - HH:mm")+" Uhr";
                 allComments.Add(oneComment);
             }
             return allComments;

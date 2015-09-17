@@ -66,7 +66,8 @@ namespace BO_FreelanceTool
         public Boolean delete()
         {
             if (_id != "") {
-                SqlCommand cmd = new SqlCommand("delete Tasks where ID = @id", Main.GetConnection());
+                foreach (Comments comments in getComments) { comments.delete(); } //erst alle Kommentare zum Task löschen!
+                SqlCommand cmd = new SqlCommand("delete Tasks where id = @id", Main.GetConnection());
                 cmd.Parameters.Add(new SqlParameter("id", _id));
                 if (cmd.ExecuteNonQuery() > 0) {
                     _id = "";
