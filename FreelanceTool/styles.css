@@ -185,6 +185,7 @@ td.labelCell{
 .zip, .zip input[type="text"], .zip span, .number, .number input[type="text"], .number span{
     width: 100px !important;
 }
+<<<<<<< HEAD
 .right{
     float: right;
 }
@@ -199,3 +200,12 @@ td.labelCell{
     font-size: 0.7rem;
     text-align: right;
 }
+=======
+input.right{
+    float: right;
+}
+
+span.error{
+    width: 400px;
+}
+>>>>>>> origin/master
