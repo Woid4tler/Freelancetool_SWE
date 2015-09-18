@@ -42,7 +42,11 @@ namespace BO_FreelanceTool
         public string dateCreate
         {
             get { return _dateCreate; }
+<<<<<<< HEAD
             private set { _dateCreate = value; }
+=======
+            set { _dateCreate = value; }
+>>>>>>> origin/master
         }
         public string dateEnd
         {

@@ -115,4 +115,11 @@ C:\Users\wg\Downloads\Freelancetool_SWE\FreelanceTool\bin\WebActivatorEx.dll
 C:\Users\wg\Downloads\Freelancetool_SWE\FreelanceTool\bin\Ninject.xml
 C:\Users\wg\Downloads\Freelancetool_SWE\FreelanceTool\bin\Ninject.Web.Common.xml
 C:\Users\wg\Downloads\Freelancetool_SWE\FreelanceTool\bin\Ninject.Web.Mvc.xml
+<<<<<<< HEAD
 C:\Users\wg\Downloads\Freelancetool_SWE\FreelanceTool\bin\AjaxControlToolkit.dll
+=======
+<<<<<<< HEAD
+C:\Users\wg\Downloads\Freelancetool_SWE\FreelanceTool\bin\AjaxControlToolkit.dll
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master

@@ -30,13 +30,24 @@ namespace BO_FreelanceTool
         public string taskID
         {
             get { return _taskID; }
+<<<<<<< HEAD
             private set { _taskID = value; }
         }
+=======
+            set { _taskID = value; }
+        }
+<<<<<<< HEAD
+>>>>>>> origin/master
         public string dateString
         {
             get { return _dateString; }
             set { _dateString = value; }
         }
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
 
         public void addToTask(string task_id)
         {
@@ -44,8 +55,18 @@ namespace BO_FreelanceTool
         }
 
         public Boolean save()
+<<<<<<< HEAD
         {
             string SQL = "insert into Comments (id, taskID, text, date) values (@id, @task_id, @comment, CURRENT_TIMESTAMP)";
+=======
+<<<<<<< HEAD
+        {
+            string SQL = "insert into Comments (id, taskID, text, date) values (@id, @task_id, @comment, CURRENT_TIMESTAMP)";
+=======
+        {
+            string SQL = "insert into Comments (id, taskID, text) values (@id, @task_id, @comment)";
+>>>>>>> origin/master
+>>>>>>> origin/master
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = SQL;
             cmd.Connection = Main.GetConnection();

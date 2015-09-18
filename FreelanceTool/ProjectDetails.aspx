@@ -19,8 +19,18 @@
         </div>
         <div class="content">
             <asp:Label ID="lblError" CssClass="error" runat="server" Font-Bold="True"></asp:Label>
+<<<<<<< HEAD
             <asp:Button ID="btnToProjectsOverview" runat="server" CssClass="right" Text="zur Projektübersicht" OnClick="btnToProjectsOverview_Click" CausesValidation="False"/><br /><br />
             <h2>PROJEKT <asp:Label runat="server" ID="lblProjekttitle"></asp:Label><asp:Label ID="lblDateCreate" CssClass="right dateHeading" runat="server"></asp:Label></h2>
+=======
+<<<<<<< HEAD
+            <asp:Button ID="btnToProjectsOverview" runat="server" CssClass="right" Text="zur Projektübersicht" OnClick="btnToProjectsOverview_Click" CausesValidation="False"/><br /><br />
+            <h2>PROJEKT <asp:Label runat="server" ID="lblProjekttitle"></asp:Label><asp:Label ID="lblDateCreate" CssClass="right dateHeading" runat="server"></asp:Label></h2>
+=======
+            <asp:Button ID="btnToProjectsOverview" runat="server" CssClass="right" Text="zur Projektübersicht" OnClick="btnToProjectsOverview_Click"/><br /><br />
+            <h2>PROJEKT <asp:Label runat="server" ID="lblProjekttitle"></asp:Label></h2>
+>>>>>>> origin/master
+>>>>>>> origin/master
             <asp:Table runat="server" cellspacing="0">
                 <asp:TableRow>
                     <asp:TableCell CssClass="labelCell">
@@ -35,9 +45,20 @@
                         <asp:TextBox ID="txtDateEnd" runat="server"></asp:TextBox>
                         <asp:Label runat="server" CssClass="errorMessages" ID="lblDateNotValid"></asp:Label>
                     </asp:TableCell>
+<<<<<<< HEAD
                     <asp:TableCell CssClass="buttonCell">
                         <asp:Button ID="btnSaveProject" runat="server" Text="Speichern" OnClick="btnSaveProject_Click" /><br />
                         <asp:Button CausesValidation="False" ID="btnCancel" runat="server" Text="Abbrechen" OnClick="btnCancel_Click" /><br />
+=======
+<<<<<<< HEAD
+                    <asp:TableCell CssClass="buttonCell">
+                        <asp:Button ID="btnSaveProject" runat="server" Text="Speichern" OnClick="btnSaveProject_Click" /><br />
+                        <asp:Button CausesValidation="False" ID="btnCancel" runat="server" Text="Abbrechen" OnClick="btnCancel_Click" /><br />
+=======
+                    <asp:TableCell CssClass="buttonRow">
+                        <asp:Button ID="btnSaveProject" runat="server" Text="Speichern" OnClick="btnSaveProject_Click" /><br /><br />
+>>>>>>> origin/master
+>>>>>>> origin/master
                         <asp:Button ID="btnDeleteProject" runat="server" Text="Löschen" OnClick="btnDeleteProject_Click" />
                     </asp:TableCell>
                 </asp:TableRow>
@@ -79,10 +100,30 @@
                                     <asp:BoundField DataField="text"/>
                                     <asp:BoundField DataField="dateString" ItemStyle-CssClass="date"/>
                                 </Columns>
+<<<<<<< HEAD
                             </asp:GridView>
                         </ItemTemplate>
                     </asp:TemplateField>
                      <asp:ButtonField CommandName="Delete" text="Löschen" ItemStyle-CssClass="buttonCell"/>
+=======
+<<<<<<< HEAD
+                            </asp:GridView>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                     <asp:ButtonField CommandName="Delete" text="Löschen" ItemStyle-CssClass="buttonCell"/>
+=======
+                            </asp:GridView><br />
+                            <asp:Table runat="server" cellspacing="0">
+                                <asp:TableRow>
+                                    <asp:TableCell><asp:TextBox ID="txtNewComment" runat="server"></asp:TextBox></asp:TableCell>
+                                    <asp:TableCell CssClass="buttonRow"><asp:Button ID="btnNewComment" runat="server" Text="Hinzufügen" OnClick="btnNewComment_Click"/></asp:TableCell>
+                                </asp:TableRow>
+                            </asp:Table>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                     <asp:ButtonField CommandName="Delete" text="Löschen" ItemStyle-CssClass="buttonRow"/>
+>>>>>>> origin/master
+>>>>>>> origin/master
                 </Columns>
             </asp:GridView>
         </div>

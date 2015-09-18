@@ -22,6 +22,10 @@ namespace FreelanceTool {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
         /// ScriptManager1-Steuerelement
         /// </summary>
         /// <remarks>
@@ -31,6 +35,11 @@ namespace FreelanceTool {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
         /// lblError-Steuerelement
         /// </summary>
         /// <remarks>

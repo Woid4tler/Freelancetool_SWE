@@ -142,10 +142,31 @@ namespace FreelanceTool
             }
         }
 
+<<<<<<< HEAD
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("CustomersOverview.aspx"); //ohne Speichern zur Kundenübersicht
         }
+=======
+<<<<<<< HEAD
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CustomerOverview.aspx"); //ohne Speichern zur Kundenübersicht
+        }
+=======
+        protected void GVAdresses_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            Adresses adressToDelete = allAdresses[e.RowIndex];
+            if (adressToDelete.delete())
+            {
+                GVAdresses.DataSource = currentCustomer.getAdresses;
+                GVAdresses.DataBind();
+            }
+        }
+
+
+>>>>>>> origin/master
+>>>>>>> origin/master
 
     }
 }

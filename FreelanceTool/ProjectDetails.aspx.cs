@@ -50,17 +50,32 @@ namespace FreelanceTool
                         lblDateCreate.Text = currentProject.dateCreate;
                         Session["Project"] = currentProject; //Projektobjekt in Session speichern
                         btnDeleteProject.Visible = true;
+<<<<<<< HEAD
                         lblDateCreate.Visible = true;
                         tblNewComment.Visible = false;
                         updateTasks();
+=======
+<<<<<<< HEAD
+                        lblDateCreate.Visible = true;
+                        updateTasks();
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
                     }
                     else
                     {
                         lblError.Text = "Projekt nicht gefunden - Sie können ein neues Projekt anlegen!";
                         btnDeleteProject.Visible = false;
                         tblNewTask.Visible = false;
+<<<<<<< HEAD
                         tblNewComment.Visible = false;
                         lblDateCreate.Visible = false;
+=======
+<<<<<<< HEAD
+                        lblDateCreate.Visible = false;
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
                         Session["Project"] = Main.newProject(); //neues leeres Kundenobjekt
                     }
                 }
@@ -69,8 +84,15 @@ namespace FreelanceTool
                     //leere ID? Dann ist das ein neues Projekt
                     btnDeleteProject.Visible = false;
                     tblNewTask.Visible = false;
+<<<<<<< HEAD
                     lblDateCreate.Visible = false;
 
+=======
+<<<<<<< HEAD
+                    lblDateCreate.Visible = false;
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
                     currentProject = Main.newProject();
                     Session["Project"] = currentProject; //neues leeres Projektobjekt
                 }
@@ -105,6 +127,10 @@ namespace FreelanceTool
                 //Feldwerte in das Objekt laden
                 currentProject.name = txtNameProject.Text;
                 currentProject.customerID = ddlCustomer.SelectedValue;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
                 currentProject.dateEnd = txtDateEnd.Text;
                 if (currentProject.save())
                 {
@@ -120,6 +146,20 @@ namespace FreelanceTool
             }
             else if(dateValidator(txtDateEnd.Text)) lblError.Text = "Projekt existiert nicht mehr in der Datenbank!";
             else lblDateNotValid.Text = "kein gültiges Datum (z.B.: 11.11.2015)";
+<<<<<<< HEAD
+=======
+=======
+                if (currentProject.save())
+                {
+                    lblError.Text = "Projekt wurde gespeichert!";
+                    btnDeleteProject.Visible = true;
+                    tblNewTask.Visible = true;
+                }
+                else lblError.Text = "Speichern fehlgeschlagen";
+            }
+            else lblError.Text = "Projekt existiert nicht mehr in der Datenbank!";
+>>>>>>> origin/master
+>>>>>>> origin/master
         }
 
         protected void btnDeleteProject_Click(object sender, EventArgs e)
@@ -185,11 +225,70 @@ namespace FreelanceTool
                 ddlTask.DataTextField = "name";
                 ddlTask.DataValueField = "id";
                 ddlTask.DataBind();
+<<<<<<< HEAD
                 if(allTasks.Count > 0) tblNewComment.Visible = true;
+=======
+>>>>>>> origin/master
             }
             catch (Exception error)
             {
                 Console.Write(error.Message);
+<<<<<<< HEAD
+=======
+            }
+        }
+
+        protected Boolean dateValidator(String date)
+        {
+            DateTime minDate = DateTime.Parse("1000/12/28");
+            DateTime maxDate = DateTime.Parse("9999/12/28");
+            DateTime dt;
+
+            if (DateTime.TryParse(date, out dt) && dt <= maxDate && dt >= minDate)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ProjectOverview.aspx"); //ohne Speichern zur Projektübersicht
+        }
+
+        protected void btnNewComment_Click(object sender, EventArgs e)
+        {
+            /*if (currentProject != null)
+            {
+                Comments newComment = new Comments();
+                //newComment.text = txtNewComment.Text;
+
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    GridView gv = (GridView)e.Row.FindControl("GVComments");
+                    allTasks = currentProject.getTasks;
+                    gv.DataSource = allTasks[e.Row.RowIndex].getComments;
+                    gv.DataBind();
+
+                }
+                newComment.text = "test";
+                newComment.addToTask(currentProject.id);
+                newComment.save();
+                txtNewTask.Text = "";
+                //liste neu laden
+                //GVTasks.DataSource = currentProject.getTasks;
+                //GVTasks.DataBind();
+            }*/
+        }
+        
+        protected void GVTasks_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            Tasks taskToDelete = allTasks[e.RowIndex];
+            if (taskToDelete.delete())
+            {
+                GVTasks.DataSource = currentProject.getTasks;
+                GVTasks.DataBind();
+>>>>>>> origin/master
             }
         }
 
