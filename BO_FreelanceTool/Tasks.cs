@@ -21,7 +21,7 @@ namespace BO_FreelanceTool
         public string id
         {
             get { return _id; }
-            internal set { _id = value; }
+            private set { _id = value; }
         }
         public string name
         {
@@ -31,7 +31,7 @@ namespace BO_FreelanceTool
         public string projectID
         {
             get { return _projectID; }
-            internal set { _projectID = value; }
+            private set { _projectID = value; }
         }
 
         public List<Comments> getComments
@@ -66,7 +66,8 @@ namespace BO_FreelanceTool
         public Boolean delete()
         {
             if (_id != "") {
-                SqlCommand cmd = new SqlCommand("delete Tasks where ID = @id", Main.GetConnection());
+                foreach (Comments comments in getComments) { comments.delete(); } //erst alle Kommentare zum Task löschen!
+                SqlCommand cmd = new SqlCommand("delete Tasks where id = @id", Main.GetConnection());
                 cmd.Parameters.Add(new SqlParameter("id", _id));
                 if (cmd.ExecuteNonQuery() > 0) {
                     _id = "";

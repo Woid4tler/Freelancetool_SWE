@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Projektübersicht - Freelancetool</title>
     <link rel="stylesheet" href="styles.css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css' />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -23,7 +24,7 @@
                 OnSelectedIndexChanged="GVProjects_SelectedIndexChanged" 
                 EmptyDataText="Keine Projekte in der Datenbank">
                 <Columns>
-                    <asp:BoundField DataField="name" HeaderText="Projektname" />
+                    <asp:BoundField DataField="name" ItemStyle-CssClass="projectRow" HeaderText="Projektname" />
                     <asp:BoundField DataField="customerName" HeaderText="Kunde" />
                     <asp:ButtonField CommandName="Select" text="Details" ItemStyle-CssClass="buttonRow"/>
                 </Columns>

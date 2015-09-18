@@ -15,13 +15,14 @@ namespace BO_FreelanceTool
         private string _customerID;
         private string _name;
         private string _customerName;
+        private String _dateCreate, _dateEnd;
 
 
     // PROPERTIES *********************************************************************************************
         public string id
         {
             get { return _id; }
-            internal set { _id = value; }
+            private set { _id = value; }
         }
         public string customerID
         {
@@ -38,6 +39,16 @@ namespace BO_FreelanceTool
             get { return _customerName; }
             set { _customerName = value; }
         }
+        public string dateCreate
+        {
+            get { return _dateCreate; }
+            private set { _dateCreate = value; }
+        }
+        public string dateEnd
+        {
+            get { return _dateEnd; }
+            set { _dateEnd = value; }
+        }
 
         public List<Tasks> getTasks
         {
@@ -47,19 +58,28 @@ namespace BO_FreelanceTool
             }
 
         }
-        /*
-         public Customers getCustomer()
+        
+        public Customers getCustomer
          {
+            get{
+                Customers projectCustomer = Customers.Load(this.customerID);
+                return projectCustomer;
+            }
+        }
 
-         }
-         */
+        public void setCustomer()
+        {
+            Customers projectCustomer = Customers.Load(this.customerID);
+            this.customerName = projectCustomer.name;
+        }
+         
 
         public Boolean save()
          {
             if (_id == "")
             {
                 //neuer Record -> INSERT
-                string SQL = "insert into Projects (id, name, customerID) values (@id, @proj_name, @cust_id)";
+                string SQL = "insert into Projects (id, name, customerID, dateCreate, dateEnd) values (@id, @proj_name, @cust_id, CURRENT_TIMESTAMP, @date_end)";
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = SQL;
                 cmd.Connection = Main.GetConnection();
@@ -69,19 +89,21 @@ namespace BO_FreelanceTool
                 cmd.Parameters.Add(new SqlParameter("id", _id));
                 cmd.Parameters.Add(new SqlParameter("proj_name", _name));
                 cmd.Parameters.Add(new SqlParameter("cust_id", _customerID));
+                cmd.Parameters.Add(new SqlParameter("date_end", Convert.ToDateTime(_dateEnd)));
                 // ExecuteNonQuery() gibt die Anzahl der veränderten/angelegten Records zurück.
                 return (cmd.ExecuteNonQuery() > 0); //hat der INSERT geklappt, sollte genau ein Record verändert worden sein
             }
             else
             {
                 //bestehender Record -> UPDATE
-                string SQL = "update Projects set name=@proj_name, customerID=@cust_id, where id = @id";
+                string SQL = "update Projects set name=@proj_name, customerID=@cust_id, dateEnd=@date_end where id = @id";
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = SQL;
                 cmd.Connection = Main.GetConnection();
                 cmd.Parameters.Add(new SqlParameter("id", _id));
                 cmd.Parameters.Add(new SqlParameter("proj_name", _name));
                 cmd.Parameters.Add(new SqlParameter("cust_id", _customerID));
+                cmd.Parameters.Add(new SqlParameter("date_end", Convert.ToDateTime(_dateEnd)));
                 return (cmd.ExecuteNonQuery() > 0);
             }
          }
@@ -127,6 +149,8 @@ namespace BO_FreelanceTool
             oneProject.id = reader.GetString(0);
             oneProject.name = reader.GetString(1);
             oneProject.customerID = reader.GetString(2);
+            oneProject.dateCreate = reader.GetDateTime(3).ToString("dd.MM.yyyy");
+            oneProject.dateEnd = reader.GetDateTime(4).ToString("dd.MM.yyyy");
             Customers projectCustomer = Customers.Load(oneProject.customerID);
             oneProject.customerName = projectCustomer.name;
             return oneProject;
@@ -134,7 +158,7 @@ namespace BO_FreelanceTool
         // Laden eines Projectobjekts - wird von Main.getProjectByID() aufgerufen
         internal static Projects Load(string ProjectID)
         {
-            string SQL = "select id, name, customerID from Projects where id = @id";
+            string SQL = "select id, name, customerID, dateCreate, dateEnd from Projects where id = @id";
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = SQL;
             cmd.Connection = Main.GetConnection();
@@ -151,7 +175,7 @@ namespace BO_FreelanceTool
         // Laden aller Projects als Liste von Objekten
         internal static List<Projects> LoadAll()
         {
-            SqlCommand cmd = new SqlCommand("Select id, name, customerID from Projects", Main.GetConnection());
+            SqlCommand cmd = new SqlCommand("Select id, name, customerID, dateCreate, dateEnd from Projects", Main.GetConnection());
             SqlDataReader reader = cmd.ExecuteReader();
             List<Projects> allProjects = new List<Projects>();
             while (reader.Read())

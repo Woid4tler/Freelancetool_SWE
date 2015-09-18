@@ -10,16 +10,18 @@ namespace BO_FreelanceTool
 {
     public class Customers
     {
+        // FELDER bzw. VARIABLEN *********************************************************************************************
         private string _id = "";
         private string _name;
         private string _mail;
         private string _phone;
 
-
+        // PROPERTIES *********************************************************************************************
+        
         public string id
         {
             get { return _id; }
-            set { _id = value; }
+            private set { _id = value; }
         }
         public string name
         {
@@ -65,7 +67,7 @@ namespace BO_FreelanceTool
             else
             {
                 //bestehender Record -> UPDATE
-                string SQL = "update Customers set name=@cust_name, mail=@cust_mail, phone=@cust_phone, where id = @id";
+                string SQL = "update Customers set name=@cust_name, mail=@cust_mail, phone=@cust_phone where id = @id";
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = SQL;
                 cmd.Connection = Main.GetConnection();
@@ -80,7 +82,7 @@ namespace BO_FreelanceTool
        public Boolean delete(){
             if (_id != "")
             {
-                foreach (Adresses address in getAdresses) { address.delete(); } //erst alle tasks des Projekts löschen!
+                foreach (Adresses address in getAdresses) { address.delete(); } //erst alle Adressen des Kunden löschen!
                 string SQL = "delete Customers where id = @id";
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = SQL;
