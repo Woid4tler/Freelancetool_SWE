@@ -19,15 +19,7 @@
         </div>
         <div class="content">
             <asp:Label ID="lblError" CssClass="error" runat="server" Font-Bold="True"></asp:Label>
-<<<<<<< HEAD
             <asp:Button ID="btnToCustomer" runat="server" Text="zur Kundenübersicht" CssClass="right" OnClick="btnToCustomer_Click" CausesValidation="False"/><br /><br />
-=======
-<<<<<<< HEAD
-            <asp:Button ID="btnToCustomer" runat="server" Text="zur Kundenübersicht" CssClass="right" OnClick="btnToCustomer_Click" CausesValidation="False"/><br /><br />
-=======
-            <asp:Button ID="btnToCustomer" runat="server" Text="zur Kundenübersicht" CssClass="right" OnClick="btnToCustomer_Click"/><br /><br />
->>>>>>> origin/master
->>>>>>> origin/master
             <h2>Kunde</h2>
             <asp:Table runat="server" cellspacing="0">
                 <asp:TableRow>
@@ -47,17 +39,8 @@
                         <asp:RequiredFieldValidator Display="Dynamic" CssClass="errorMessages" runat="server" ControlToValidate="txtMailCustomer" ErrorMessage="Mail Adresse fehlt"></asp:RequiredFieldValidator>
                     </asp:TableCell>
                     <asp:TableCell CssClass="buttonRow">
-<<<<<<< HEAD
                         <asp:Button ID="btnSaveCustomer" runat="server" Text="Speichern" OnClick="btnSaveCustomer_Click"/><br />
                         <asp:Button CausesValidation="False" ID="btnCancel" runat="server" Text="Abbrechen" OnClick="btnCancel_Click" /><br />
-=======
-<<<<<<< HEAD
-                        <asp:Button ID="btnSaveCustomer" runat="server" Text="Speichern" OnClick="btnSaveCustomer_Click"/><br />
-                        <asp:Button CausesValidation="False" ID="btnCancel" runat="server" Text="Abbrechen" OnClick="btnCancel_Click" /><br />
-=======
-                        <asp:Button ID="btnSaveCustomer" runat="server" Text="Speichern" OnClick="btnSaveCustomer_Click"/><br /><br />
->>>>>>> origin/master
->>>>>>> origin/master
                         <asp:Button ID="btnDeleteCustomer" runat="server" Text="Löschen" OnClick="btnDeleteCustomer_Click"/>
                     </asp:TableCell>
                 </asp:TableRow>
